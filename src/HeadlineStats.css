@@ -1,0 +1,34 @@
+.HeadlineStats {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.HeadlineStats .extra-stats {
+  margin: 25px 0 0;
+  padding: 0;
+}
+
+.HeadlineStats .headline-weather-icon,
+.HeadlineStats .headline-temperature {
+  text-align: center;
+}
+
+.HeadlineStats .headline-weather-icon {
+  font-size: 150px;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.HeadlineStats .headline-temperature {
+  font-size: 40px;
+}
+
+.HeadlineStats hr {
+  display: block;
+  margin: 17px auto 0;
+  padding: 0;
+  color: #fff;
+  width: 80%;
+  border-top: 2px solid #fff;
+  opacity: 90%;
+}

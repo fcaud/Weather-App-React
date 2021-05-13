@@ -1,0 +1,22 @@
+.Forecast .day-weather-icon,
+.day-temperature {
+  text-align: center;
+}
+
+.Forecast .day-forecast {
+  padding: 0 4% 25px 4%;
+  overflow-x: auto;
+}
+
+.Forecast .day-forecast .row {
+  flex-wrap: nowrap;
+}
+
+.Forecast .day-weather-icon {
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+.Forecast .day-temperature {
+  font-size: 11px;
+}

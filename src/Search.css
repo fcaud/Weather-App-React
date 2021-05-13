@@ -1,0 +1,72 @@
+.Search .location-button {
+  position: absolute;
+  right: 5%;
+  margin-right: 100px;
+  margin-top: 3px;
+  height: 17px;
+  font-size: 9px;
+  width: 5%;
+  border-radius: 15px;
+  border: solid 2px #80868a;
+  background-image: linear-gradient(to top, #99a0a3 0%, #a3aaad 100%);
+  color: #fff;
+}
+
+.Search .unit-switch {
+  position: absolute;
+  right: 5%;
+}
+
+.Search .city-search-bar {
+  width: 65%;
+  margin: 25px 0 5px 4%;
+  padding-left: 10px;
+  border-radius: 15px;
+  border: solid 2px #80868a;
+}
+
+.Search .city-search-button {
+  width: 25%;
+  margin: 25px 4% 5px 0.5%;
+  padding: 0;
+  border-radius: 15px;
+  border: solid 2px #80868a;
+  background-image: linear-gradient(to top, #99a0a3 0%, #a3aaad 100%);
+  color: #fff;
+}
+
+.Search.weather-cold .city-search-bar {
+  border-color: #88a6db;
+  color: #88a6db;
+}
+
+.Search.weather-cold .city-search-button,
+.Search.weather-cold .location-button {
+  border-color: #88a6db;
+  color: #fff;
+  background-image: linear-gradient(120deg, #7391c2 0%, #668bc5 100%);
+}
+
+.Search.weather-cold ::placeholder {
+  color: #88a6db;
+}
+
+.Search.weather-hot .city-search-bar {
+  border-color: #f09064;
+  color: #f09064;
+}
+
+.Search.weather-hot .city-search-button,
+.Search.weather-hot .location-button {
+  border-color: #f09064;
+  color: #fff;
+  background-image: linear-gradient(120deg, #b87c2e 0%, #c48061 100%);
+}
+
+.Search.weather-hot ::placeholder {
+  color: #f09064;
+}
+
+.Search .city-search-button:hover {
+  cursor: pointer;
+}

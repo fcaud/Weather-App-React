@@ -1,0 +1,19 @@
+.AddModule {
+  display: block;
+  margin: 10px auto 10px;
+  width: 700px;
+  max-width: 90%;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  position: relative;
+  border-radius: 14px;
+  height: 150px;
+}
+
+.AddModule .plus-icon {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 100px;
+  background: transparent;
+  border: transparent;
+}

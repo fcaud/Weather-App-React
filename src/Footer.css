@@ -1,0 +1,19 @@
+.Footer a.code-source-link,
+.Footer a.linkedin-link,
+.Footer p.link-text {
+  text-align: center;
+  display: inline;
+  color: #383a3b;
+}
+
+a.code-source-link:hover,
+a.linkedin-link:hover {
+  color: #3e7fe7;
+}
+
+.Footer {
+  color: #383a3b;
+  width: fit-content;
+  display: block;
+  margin: 0 auto;
+}

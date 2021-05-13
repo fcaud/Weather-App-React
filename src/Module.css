@@ -1,0 +1,18 @@
+.Module {
+  display: block;
+  margin: 10px auto 10px;
+  width: 700px;
+  max-width: 90%;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  position: relative;
+  border-radius: 14px;
+  min-height: 615px;
+}
+
+.Module.weather-hot {
+  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+
+.Module.weather-cold {
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
