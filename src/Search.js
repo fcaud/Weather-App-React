@@ -1,5 +1,7 @@
 import React from "react";
 import "./Search.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as Icons from "@fortawesome/free-solid-svg-icons";
 
 export default function Search(props) {
   return (
@@ -15,7 +17,7 @@ export default function Search(props) {
       </form>
       <div>
         <button className="location-button">
-          <i className="fas fa-location-arrow"></i>
+          <FontAwesomeIcon icon={Icons.faLocationArrow} />
         </button>
       </div>
       <div className="form-check form-switch unit-switch">

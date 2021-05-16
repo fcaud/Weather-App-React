@@ -1,12 +1,14 @@
 import React from "react";
 import "./HeadlineStats.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as Icons from "@fortawesome/free-solid-svg-icons";
 
 export default function HeadlineStats(props) {
   return (
     <div className="HeadlineStats">
       <h2 className="city-header">{props.city}</h2>
       <div className="headline-weather-icon icon">
-        <i className="fas fa-cloud-sun"></i>
+        <FontAwesomeIcon icon={Icons.faCloudSun} />
       </div>
       <div className="headline-temperature">
         <span className="temp-num">{props.temp}</span>°C
