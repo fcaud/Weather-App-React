@@ -11,10 +11,12 @@ export default function Module(props) {
   const [ready, setReady] = useState(false);
 
   function runAPI() {
-    const apiKey = "a853abb2375faaf0d512fcc19dee1229";
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&appid=${apiKey}&units=metric`;
+    if (props.city) {
+      const apiKey = "a853abb2375faaf0d512fcc19dee1229";
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&appid=${apiKey}&units=metric`;
 
-    axios.get(apiUrl).then(getWeather);
+      axios.get(apiUrl).then(getWeather);
+    }
   }
 
   useEffect(() => {
