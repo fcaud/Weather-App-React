@@ -1,3 +1,5 @@
+// move axios to module
+
 import React, { useState, useEffect } from "react";
 import "./HeadlineStats.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,13 +24,19 @@ export default function HeadlineStats(props) {
   function getWeather(response) {
     console.log(response.data);
     const data = response.data;
+    const timestamp = new Date(data.dt * 1000);
     setWeatherData({
       city: data.name,
       temp: Math.round(data.main.temp),
       wind: Math.round(data.wind.speed),
       humidity: Math.round(data.main.humidity),
-      description: data.weather[0].description,
+      description: data.weather[0].main,
+      fullDescription: data.weather[0].description,
+      timeStamp: timestamp,
     });
+
+    props.updateDate(timestamp);
+
     setReady(true);
   }
 

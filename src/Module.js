@@ -11,7 +11,11 @@ export default function Module(props) {
     return (
       <section className={`Module ${tempStatus}`}>
         <Search tempStatus={tempStatus} />
-        <HeadlineStats city={props.city} temp={props.temp} />
+        <HeadlineStats
+          city={props.city}
+          temp={props.temp}
+          updateDate={props.updateDate}
+        />
         <Forecast />
       </section>
     );
