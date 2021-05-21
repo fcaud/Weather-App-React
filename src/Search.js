@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Search.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icons from "@fortawesome/free-solid-svg-icons";
 
 export default function Search(props) {
+  const [searchValue, setSearchValue] = useState(null);
+
+  function searchInput(event) {
+    setSearchValue(event.target.value);
+  }
+
   return (
     <div className={`Search ${props.tempStatus}`}>
-      <form className="search-bar" autoComplete="off">
+      <form
+        className="search-bar"
+        autoComplete="off"
+        onSubmit={(event) => {
+          props.searchTrigger(event, searchValue);
+        }}
+      >
         <input
           type="search"
           name="city-search"
           placeholder="Please enter city..."
           className="city-search-bar"
+          onChange={searchInput}
         />
         <input type="submit" value="Search" className="city-search-button" />
       </form>

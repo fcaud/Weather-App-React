@@ -45,11 +45,16 @@ export default function Module(props) {
   if (props.moduleID === "liveModule") {
     return (
       <section className={`Module ${tempStatus}`}>
-        <Search tempStatus={tempStatus} />
+        <Search
+          tempStatus={tempStatus}
+          searchTrigger={(event, searchValue) => {
+            event.preventDefault();
+            console.log(event, searchValue);
+          }}
+        />
         <HeadlineStats
           city={props.city}
           temp={props.temp}
-          updateDate={props.updateDate}
           weatherData={weatherData}
           ready={ready}
         />
