@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "./Header.css";
 
 export default function Header(props) {
-  console.log(props);
-
   const [dateStamp, setDateStamp] = useState();
 
   function formatDate(unformattedDate) {

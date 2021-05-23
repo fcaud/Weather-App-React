@@ -10,21 +10,20 @@ export default function Module(props) {
   const [weatherData, setWeatherData] = useState({});
   const [ready, setReady] = useState(false);
 
-  function runAPI() {
-    if (props.city) {
+  function runAPI(city) {
+    if (city) {
       const apiKey = "a853abb2375faaf0d512fcc19dee1229";
-      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&appid=${apiKey}&units=metric`;
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
       axios.get(apiUrl).then(getWeather);
     }
   }
 
   useEffect(() => {
-    runAPI();
+    runAPI(props.city);
   }, []);
 
   function getWeather(response) {
-    console.log(response.data);
     const data = response.data;
     const timestamp = new Date(data.dt * 1000);
     setWeatherData({
@@ -49,15 +48,10 @@ export default function Module(props) {
           tempStatus={tempStatus}
           searchTrigger={(event, searchValue) => {
             event.preventDefault();
-            console.log(event, searchValue);
+            runAPI(searchValue);
           }}
         />
-        <HeadlineStats
-          city={props.city}
-          temp={props.temp}
-          weatherData={weatherData}
-          ready={ready}
-        />
+        <HeadlineStats weatherData={weatherData} ready={ready} />
         <Forecast />
       </section>
     );
