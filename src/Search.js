@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icons from "@fortawesome/free-solid-svg-icons";
 
 export default function Search(props) {
-  const [searchValue, setSearchValue] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [isToggledValue, setIsToggledValue] = useState(false);
 
   function searchInput(event) {
     setSearchValue(event.target.value);
@@ -16,7 +17,8 @@ export default function Search(props) {
         className="search-bar"
         autoComplete="off"
         onSubmit={(event) => {
-          props.searchTrigger(event, searchValue);
+          event.preventDefault();
+          props.searchTrigger(searchValue, isToggledValue);
         }}
       >
         <input
@@ -25,6 +27,7 @@ export default function Search(props) {
           placeholder="Please enter city..."
           className="city-search-bar"
           onChange={searchInput}
+          value={searchValue}
         />
         <input type="submit" value="Search" className="city-search-button" />
       </form>
@@ -38,6 +41,11 @@ export default function Search(props) {
           className="form-check-input unit-toggle"
           type="checkbox"
           id="flexSwitchCheckDefault"
+          value={isToggledValue}
+          onChange={() => {
+            setIsToggledValue(!isToggledValue);
+            props.tempToggle(!isToggledValue);
+          }}
         />
         <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
           °C / °F

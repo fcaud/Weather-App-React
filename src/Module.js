@@ -9,18 +9,19 @@ import axios from "axios";
 export default function Module(props) {
   const [weatherData, setWeatherData] = useState({});
   const [ready, setReady] = useState(false);
+  const [city, setCity] = useState(props.city);
 
-  function runAPI(city) {
+  function runAPI(city, unit) {
     if (city) {
       const apiKey = "a853abb2375faaf0d512fcc19dee1229";
-      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
 
       axios.get(apiUrl).then(getWeather);
     }
   }
 
   useEffect(() => {
-    runAPI(props.city);
+    runAPI(props.city, "metric");
   }, []);
 
   function getWeather(response) {
@@ -46,9 +47,20 @@ export default function Module(props) {
       <section className={`Module ${tempStatus}`}>
         <Search
           tempStatus={tempStatus}
-          searchTrigger={(event, searchValue) => {
-            event.preventDefault();
-            runAPI(searchValue);
+          searchTrigger={(searchValue, isToggledValue) => {
+            if (isToggledValue) {
+              runAPI(searchValue, "imperial");
+            } else {
+              runAPI(searchValue, "metric");
+            }
+            setCity(searchValue);
+          }}
+          tempToggle={(isToggledValue) => {
+            if (isToggledValue) {
+              runAPI(city, "imperial");
+            } else {
+              runAPI(city, "metric");
+            }
           }}
         />
         <HeadlineStats weatherData={weatherData} ready={ready} />
