@@ -19,6 +19,14 @@ export default function Module(props) {
       const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
 
       axios.get(apiUrl).then(getWeather);
+
+      if (unit === "metric") {
+        setTempUnit("°C");
+        setWindUnit("kmh");
+      } else {
+        setTempUnit("°F");
+        setWindUnit("mph");
+      }
     }
   }
 
@@ -52,24 +60,16 @@ export default function Module(props) {
           searchTrigger={(searchValue, isToggledValue) => {
             if (isToggledValue) {
               runAPI(searchValue, "imperial");
-              setTempUnit("°F");
-              setWindUnit("mph");
             } else {
               runAPI(searchValue, "metric");
-              setTempUnit("°C");
-              setWindUnit("kmh");
             }
             setCity(searchValue);
           }}
           tempToggle={(isToggledValue) => {
             if (isToggledValue) {
               runAPI(city, "imperial");
-              setTempUnit("°F");
-              setWindUnit("mph");
             } else {
               runAPI(city, "metric");
-              setTempUnit("°C");
-              setWindUnit("kmh");
             }
           }}
         />
