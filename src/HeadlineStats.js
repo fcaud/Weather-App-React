@@ -26,7 +26,8 @@ export default function HeadlineStats(props) {
           />
         </div>
         <div className="headline-temperature">
-          <span className="temp-num">{props.weatherData.temp}</span>°C
+          <span className="temp-num">{props.weatherData.temp}</span>
+          {props.tempUnit}
         </div>
         <div className="row extra-stats">
           <div className="col"></div>
@@ -34,7 +35,8 @@ export default function HeadlineStats(props) {
             <p className="p-wind">
               Wind speed:
               <br />
-              <span>{props.weatherData.wind}</span>kmh
+              <span>{props.weatherData.wind}</span>
+              {props.windUnit}
             </p>
           </div>
           <div className="col">

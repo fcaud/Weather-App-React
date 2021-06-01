@@ -5,7 +5,7 @@ import * as Icons from "@fortawesome/free-solid-svg-icons";
 
 export default function Search(props) {
   const [searchValue, setSearchValue] = useState("");
-  const [isToggledValue, setIsToggledValue] = useState(false);
+  const [isToggledValue, setToggleValue] = useState(false);
 
   function searchInput(event) {
     setSearchValue(event.target.value);
@@ -43,7 +43,7 @@ export default function Search(props) {
           id="flexSwitchCheckDefault"
           value={isToggledValue}
           onChange={() => {
-            setIsToggledValue(!isToggledValue);
+            setToggleValue(!isToggledValue);
             props.tempToggle(!isToggledValue);
           }}
         />

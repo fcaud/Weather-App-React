@@ -10,6 +10,8 @@ export default function Module(props) {
   const [weatherData, setWeatherData] = useState({});
   const [ready, setReady] = useState(false);
   const [city, setCity] = useState(props.city);
+  const [tempUnit, setTempUnit] = useState("°C");
+  const [windUnit, setWindUnit] = useState("kmh");
 
   function runAPI(city, unit) {
     if (city) {
@@ -50,20 +52,33 @@ export default function Module(props) {
           searchTrigger={(searchValue, isToggledValue) => {
             if (isToggledValue) {
               runAPI(searchValue, "imperial");
+              setTempUnit("°F");
+              setWindUnit("mph");
             } else {
               runAPI(searchValue, "metric");
+              setTempUnit("°C");
+              setWindUnit("kmh");
             }
             setCity(searchValue);
           }}
           tempToggle={(isToggledValue) => {
             if (isToggledValue) {
               runAPI(city, "imperial");
+              setTempUnit("°F");
+              setWindUnit("mph");
             } else {
               runAPI(city, "metric");
+              setTempUnit("°C");
+              setWindUnit("kmh");
             }
           }}
         />
-        <HeadlineStats weatherData={weatherData} ready={ready} />
+        <HeadlineStats
+          weatherData={weatherData}
+          ready={ready}
+          tempUnit={tempUnit}
+          windUnit={windUnit}
+        />
         <Forecast />
       </section>
     );
