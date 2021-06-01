@@ -32,6 +32,7 @@ export default function Module(props) {
 
   useEffect(() => {
     runAPI(props.city, "metric");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function getWeather(response) {
