@@ -1,15 +1,20 @@
+import axios from "axios";
 import React from "react";
 import "./Forecast.css";
-import ForecasDay from "./ForecastDay";
+import ForecastDay from "./ForecastDay";
 
-export default function Forecast() {
+export default function Forecast(props) {
+  console.log(props.forecastData);
+
+  // pass data to each ForecastDay
+  // work out how to pass current day to Forecast days
   return (
     <div className="row Forecast">
-      <ForecasDay day="Mon" dayX={1} />
-      <ForecasDay day="Tue" dayX={2} />
-      <ForecasDay day="Wed" dayX={3} />
-      <ForecasDay day="Thu" dayX={4} />
-      <ForecasDay day="Fri" dayX={5} />
+      <ForecastDay day="Mon" dayX={1} />
+      <ForecastDay day="Tue" dayX={2} />
+      <ForecastDay day="Wed" dayX={3} />
+      <ForecastDay day="Thu" dayX={4} />
+      <ForecastDay day="Fri" dayX={5} />
     </div>
   );
 }

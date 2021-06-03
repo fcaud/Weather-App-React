@@ -8,10 +8,12 @@ import axios from "axios";
 
 export default function Module(props) {
   const [weatherData, setWeatherData] = useState({});
+  const [forecastData, setForecastData] = useState({});
   const [ready, setReady] = useState(false);
   const [city, setCity] = useState(props.city);
   const [tempUnit, setTempUnit] = useState("°C");
   const [windUnit, setWindUnit] = useState("kmh");
+  const [unit, setUnit] = useState("metric");
 
   function runAPI(city, unit) {
     if (city) {
@@ -23,9 +25,11 @@ export default function Module(props) {
       if (unit === "metric") {
         setTempUnit("°C");
         setWindUnit("kmh");
+        setUnit("metric");
       } else {
         setTempUnit("°F");
         setWindUnit("mph");
+        setUnit("imperial");
       }
     }
   }
@@ -38,6 +42,7 @@ export default function Module(props) {
   function getWeather(response) {
     const data = response.data;
     const timestamp = new Date(data.dt * 1000);
+
     setWeatherData({
       city: data.name,
       temp: Math.round(data.main.temp),
@@ -46,10 +51,27 @@ export default function Module(props) {
       description: data.weather[0].main,
       fullDescription: data.weather[0].description,
       timeStamp: timestamp,
+      coordinates: data.coord,
     });
     props.updateDate(timestamp);
 
+    callForecastAPI(data.coord);
+
     setReady(true);
+  }
+
+  function callForecastAPI(coordinates) {
+    const apiKey = "a853abb2375faaf0d512fcc19dee1229";
+    const longitude = coordinates.lon;
+    const latitude = coordinates.lat;
+
+    const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${unit}`;
+
+    axios.get(apiUrl).then(handleForecastAPI);
+  }
+
+  function handleForecastAPI(response) {
+    setForecastData({ dailyData: response.data.daily });
   }
 
   let tempStatus = props.tempStatus;
@@ -80,7 +102,7 @@ export default function Module(props) {
           tempUnit={tempUnit}
           windUnit={windUnit}
         />
-        <Forecast />
+        <Forecast forecastData={forecastData} />
       </section>
     );
   } else {
