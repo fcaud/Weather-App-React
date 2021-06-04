@@ -102,7 +102,7 @@ export default function Module(props) {
           tempUnit={tempUnit}
           windUnit={windUnit}
         />
-        <Forecast forecastData={forecastData} />
+        <Forecast forecastData={forecastData} unit={unit} />
       </section>
     );
   } else {
