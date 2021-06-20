@@ -4,19 +4,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icons from "@fortawesome/free-solid-svg-icons";
 
 export default function ForecastDay(props) {
-  const timestamp = new Date(props.data.dt * 1000);
+  const data = props.data;
+
+  const timestamp = new Date(data.dt * 1000);
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const day = timestamp.getDay();
 
-  const lowTemp = Math.round(props.data.temp.min);
-  const highTemp = Math.round(props.data.temp.max);
+  const lowTemp = Math.round(data.temp.min);
+  const highTemp = Math.round(data.temp.max);
+
+  const description = data.weather[0].main;
+  const icon = {
+    Clear: Icons.faSun,
+    Clouds: Icons.faCloudSun,
+    Drizzle: Icons.faCloudRain,
+    Rain: Icons.faCloudShowersHeavy,
+    Thunderstorm: Icons.faBolt,
+    Snow: Icons.faSnowflake,
+    Mist: Icons.faStream,
+  };
 
   if (props.unit === "imperial") {
     return (
-      <div className="col day-{props.dayX}">
+      <div className="col">
         <h3>{days[day]}</h3>
         <div className="day-weather-icon icon">
-          <FontAwesomeIcon icon={Icons.faCloudSun} />
+          <FontAwesomeIcon icon={icon[description] || Icons.faStream} />
         </div>
         <p className="day-temperature">
           <span className="min-temp-num">{lowTemp}</span>°F /
@@ -28,10 +41,10 @@ export default function ForecastDay(props) {
     );
   } else {
     return (
-      <div className="col day-{props.dayX}">
+      <div className="col">
         <h3>{days[day]}</h3>
         <div className="day-weather-icon icon">
-          <FontAwesomeIcon icon={Icons.faCloudSun} />
+          <FontAwesomeIcon icon={icon[description] || Icons.faStream} />
         </div>
         <p className="day-temperature">
           <span className="min-temp-num">{lowTemp}</span>°C /

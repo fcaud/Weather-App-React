@@ -32,7 +32,10 @@ export default function Search(props) {
         <input type="submit" value="Search" className="city-search-button" />
       </form>
       <div>
-        <button className="location-button">
+        <button
+          className="location-button"
+          onClick={props.currentLocationButton}
+        >
           <FontAwesomeIcon icon={Icons.faLocationArrow} />
         </button>
       </div>

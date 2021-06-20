@@ -74,6 +74,26 @@ export default function Module(props) {
     setForecastData({ dailyData: response.data.daily });
   }
 
+  function getLocation() {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      searchCurrentLocation(position);
+    });
+  }
+
+  function searchCurrentLocation(position) {
+    let coords = position.coords;
+    let latitude = coords.latitude;
+    let longitude = coords.longitude;
+    const unit = `metric`;
+
+    let weatherApiKey = `a853abb2375faaf0d512fcc19dee1229`;
+    let weatherCoordsApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherApiKey}&units=${unit}`;
+
+    axios.get(weatherCoordsApiUrl).then(function (response) {
+      getWeather(response);
+    });
+  }
+
   let tempStatus = props.tempStatus;
   if (props.moduleID === "liveModule") {
     return (
@@ -87,6 +107,9 @@ export default function Module(props) {
               runAPI(searchValue, "metric");
             }
             setCity(searchValue);
+          }}
+          currentLocationButton={() => {
+            getLocation();
           }}
           tempToggle={(isToggledValue) => {
             if (isToggledValue) {

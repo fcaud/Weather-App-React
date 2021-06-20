@@ -22,7 +22,7 @@ export default function HeadlineStats(props) {
         <div className="headline-weather-icon icon">
           <FontAwesomeIcon
             icon={icon[description] || Icons.faStream}
-            title={props.weatherData.description}
+            title={description}
           />
         </div>
         <div className="headline-temperature">
