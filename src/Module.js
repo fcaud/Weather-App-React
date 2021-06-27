@@ -78,7 +78,7 @@ export default function Module(props) {
   }
 
   function getLocation(unit) {
-    navigator.geolocation.getCurrentPosition(function (position) {
+      navigator.geolocation.getCurrentPosition((position)=> {
       searchCurrentLocation(position, unit);
     });
   }
@@ -91,7 +91,7 @@ export default function Module(props) {
     let weatherApiKey = `a853abb2375faaf0d512fcc19dee1229`;
     let weatherCoordsApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherApiKey}&units=${unit}`;
 
-    axios.get(weatherCoordsApiUrl).then(function (response, unit) {
+    axios.get(weatherCoordsApiUrl).then(function (response) {
       getWeather(response, unit);
     }); 
   }
