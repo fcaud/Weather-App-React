@@ -20,7 +20,7 @@ export default function Module(props) {
       const apiKey = "a853abb2375faaf0d512fcc19dee1229";
       const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
 
-      axios.get(apiUrl).then(getWeather);
+      axios.get(apiUrl).then((response) => {getWeather(response, unit)});
 
       if (unit === "metric") {
         setTempUnit("°C");
@@ -39,9 +39,11 @@ export default function Module(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function getWeather(response) {
+  function getWeather(response, unit) {
     const data = response.data;
     const timestamp = new Date(data.dt * 1000);
+
+    console.log(unit)
 
     setWeatherData({
       city: data.name,
@@ -55,13 +57,13 @@ export default function Module(props) {
     });
     props.updateDate(timestamp);
 
-    callForecastAPI(data.coord);
+    callForecastAPI(data.coord, unit);
 
     setReady(true);
     setCity(data.name)
   }
 
-  function callForecastAPI(coordinates) {
+  function callForecastAPI(coordinates, unit) {
     const apiKey = "a853abb2375faaf0d512fcc19dee1229";
     const longitude = coordinates.lon;
     const latitude = coordinates.lat;
@@ -86,13 +88,11 @@ export default function Module(props) {
     let latitude = coords.latitude;
     let longitude = coords.longitude;
 
-    console.log(unit)
-   
     let weatherApiKey = `a853abb2375faaf0d512fcc19dee1229`;
     let weatherCoordsApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherApiKey}&units=${unit}`;
 
     axios.get(weatherCoordsApiUrl).then(function (response, unit) {
-      getWeather(response);
+      getWeather(response, unit);
     }); 
   }
 

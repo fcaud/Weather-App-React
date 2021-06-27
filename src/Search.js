@@ -36,7 +36,6 @@ export default function Search(props) {
           className="location-button"
           onClick={(event) => {
             event.preventDefault();
-            console.log(isToggledValue)
             props.currentLocationButton(isToggledValue)}}
         >
           <FontAwesomeIcon icon={Icons.faLocationArrow} />
