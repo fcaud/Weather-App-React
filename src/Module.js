@@ -20,7 +20,9 @@ export default function Module(props) {
       const apiKey = "a853abb2375faaf0d512fcc19dee1229";
       const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
 
-      axios.get(apiUrl).then((response) => {getWeather(response, unit)});
+      axios.get(apiUrl).then((response) => {
+        getWeather(response, unit);
+      });
 
       if (unit === "metric") {
         setTempUnit("°C");
@@ -43,8 +45,6 @@ export default function Module(props) {
     const data = response.data;
     const timestamp = new Date(data.dt * 1000);
 
-    console.log(unit)
-
     setWeatherData({
       city: data.name,
       temp: Math.round(data.main.temp),
@@ -60,7 +60,7 @@ export default function Module(props) {
     callForecastAPI(data.coord, unit);
 
     setReady(true);
-    setCity(data.name)
+    setCity(data.name);
   }
 
   function callForecastAPI(coordinates, unit) {
@@ -78,7 +78,7 @@ export default function Module(props) {
   }
 
   function getLocation(unit) {
-      navigator.geolocation.getCurrentPosition((position)=> {
+    navigator.geolocation.getCurrentPosition((position) => {
       searchCurrentLocation(position, unit);
     });
   }
@@ -93,11 +93,11 @@ export default function Module(props) {
 
     axios.get(weatherCoordsApiUrl).then(function (response) {
       getWeather(response, unit);
-    }); 
+    });
   }
 
   let tempStatus = props.tempStatus;
-  if (props.moduleID === "liveModule") {
+  if (props.moduleStatus === "liveModule") {
     return (
       <section className={`Module ${tempStatus}`}>
         <Search
@@ -113,7 +113,9 @@ export default function Module(props) {
           currentLocationButton={(isToggledValue) => {
             if (isToggledValue) {
               getLocation("imperial");
-            } else {getLocation("metric")}
+            } else {
+              getLocation("metric");
+            }
           }}
           tempToggle={(isToggledValue) => {
             if (isToggledValue) {

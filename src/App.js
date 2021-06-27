@@ -8,34 +8,31 @@ import HeaderSpacing from "./HeaderSpacing";
 
 export default function App() {
   const [date, setDate] = useState(null);
-
+  const [modules, setModules] = useState([
+    { moduleStatus: "liveModule", city: "London", tempStatus: "weather-cold" },
+    { moduleStatus: "liveModule", city: "Madrid", tempStatus: "weather-hot" },
+    { moduleStatus: "placeholderModule" },
+  ]);
   return (
     <div className="App container">
       <Header date={date} />
       <HeaderSpacing />
-      <Module
-        moduleID="liveModule"
-        city="London"
-        tempStatus="weather-cold"
-        updateDate={(newDate) => {
-          setDate(newDate);
+      {modules.map((module, index) => (
+        <Module
+          key={index}
+          moduleStatus={module.moduleStatus}
+          city={module.city}
+          tempStatus={module.tempStatus}
+          updateDate={(newDate) => {
+            setDate(newDate);
+          }}
+        />
+      ))}
+      <AddModule
+        addModule={() => {
+          setModules([...modules, { moduleStatus: "placeholderModule" }]);
         }}
       />
-      <Module
-        moduleID="liveModule"
-        city="Madrid"
-        tempStatus="weather-hot"
-        updateDate={(newDate) => {
-          setDate(newDate);
-        }}
-      />
-      <Module
-        moduleID="placeholderModule"
-        updateDate={(newDate) => {
-          setDate(newDate);
-        }}
-      />
-      <AddModule />
       <Footer />
     </div>
   );
