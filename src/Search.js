@@ -34,7 +34,10 @@ export default function Search(props) {
       <div>
         <button
           className="location-button"
-          onClick={props.currentLocationButton}
+          onClick={(event) => {
+            event.preventDefault();
+            console.log(isToggledValue)
+            props.currentLocationButton(isToggledValue)}}
         >
           <FontAwesomeIcon icon={Icons.faLocationArrow} />
         </button>

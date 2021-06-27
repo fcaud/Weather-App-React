@@ -58,6 +58,7 @@ export default function Module(props) {
     callForecastAPI(data.coord);
 
     setReady(true);
+    setCity(data.name)
   }
 
   function callForecastAPI(coordinates) {
@@ -74,24 +75,25 @@ export default function Module(props) {
     setForecastData({ dailyData: response.data.daily });
   }
 
-  function getLocation() {
+  function getLocation(unit) {
     navigator.geolocation.getCurrentPosition(function (position) {
-      searchCurrentLocation(position);
+      searchCurrentLocation(position, unit);
     });
   }
 
-  function searchCurrentLocation(position) {
+  function searchCurrentLocation(position, unit) {
     let coords = position.coords;
     let latitude = coords.latitude;
     let longitude = coords.longitude;
-    const unit = `metric`;
 
+    console.log(unit)
+   
     let weatherApiKey = `a853abb2375faaf0d512fcc19dee1229`;
     let weatherCoordsApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherApiKey}&units=${unit}`;
 
-    axios.get(weatherCoordsApiUrl).then(function (response) {
+    axios.get(weatherCoordsApiUrl).then(function (response, unit) {
       getWeather(response);
-    });
+    }); 
   }
 
   let tempStatus = props.tempStatus;
@@ -108,8 +110,10 @@ export default function Module(props) {
             }
             setCity(searchValue);
           }}
-          currentLocationButton={() => {
-            getLocation();
+          currentLocationButton={(isToggledValue) => {
+            if (isToggledValue) {
+              getLocation("imperial");
+            } else {getLocation("metric")}
           }}
           tempToggle={(isToggledValue) => {
             if (isToggledValue) {

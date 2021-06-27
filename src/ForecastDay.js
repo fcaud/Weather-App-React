@@ -29,7 +29,7 @@ export default function ForecastDay(props) {
       <div className="col">
         <h3>{days[day]}</h3>
         <div className="day-weather-icon icon">
-          <FontAwesomeIcon icon={icon[description] || Icons.faStream} />
+          <FontAwesomeIcon icon={icon[description] || Icons.faStream} title={description} />
         </div>
         <p className="day-temperature">
           <span className="min-temp-num">{lowTemp}</span>°F /
