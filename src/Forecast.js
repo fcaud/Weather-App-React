@@ -3,14 +3,14 @@ import "./Forecast.css";
 import ForecastDay from "./ForecastDay";
 
 export default function Forecast(props) {
-  if (props.forecastData.dailyData) {
+  let forecastData = props.forecastData.dailyData;
+
+  if (forecastData) {
     return (
       <div className="row Forecast">
-        <ForecastDay data={props.forecastData.dailyData[0]} unit={props.unit} />
-        <ForecastDay data={props.forecastData.dailyData[1]} unit={props.unit} />
-        <ForecastDay data={props.forecastData.dailyData[2]} unit={props.unit} />
-        <ForecastDay data={props.forecastData.dailyData[3]} unit={props.unit} />
-        <ForecastDay data={props.forecastData.dailyData[4]} unit={props.unit} />
+        {forecastData.slice(0, 4).map((data, index) => {
+          return <ForecastDay data={data} unit={props.unit} key={index} />;
+        })}
       </div>
     );
   } else {
