@@ -124,6 +124,7 @@ export default function Module(props) {
               runAPI(city, "metric");
             }
           }}
+          moduleStatus={props.moduleStatus}
         />
         <HeadlineStats
           weatherData={weatherData}
@@ -137,7 +138,25 @@ export default function Module(props) {
   } else {
     return (
       <section className="Module">
-        <Search />
+        <Search
+          searchTrigger={(searchValue, isToggledValue) => {
+            if (isToggledValue) {
+              runAPI(searchValue, "imperial");
+            } else {
+              runAPI(searchValue, "metric");
+            }
+            setCity(searchValue);
+          }}
+          currentLocationButton={(isToggledValue) => {
+            if (isToggledValue) {
+              getLocation("imperial");
+            } else {
+              getLocation("metric");
+            }
+          }}
+          embedContent={props.embedContent}
+          moduleStatus={props.moduleStatus}
+        />
         <Placeholder />
       </section>
     );

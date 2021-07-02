@@ -11,7 +11,7 @@ export default function App() {
   const [modules, setModules] = useState([
     { moduleStatus: "liveModule", city: "London", tempStatus: "weather-cold" },
     { moduleStatus: "liveModule", city: "Madrid", tempStatus: "weather-hot" },
-    { moduleStatus: "placeholderModule" },
+    { moduleStatus: "placeholderModule", tempStatus: null },
   ]);
   return (
     <div className="App container">
@@ -26,11 +26,18 @@ export default function App() {
           updateDate={(newDate) => {
             setDate(newDate);
           }}
+          embedContent={() => {
+            module.moduleStatus = "liveModule";
+            setModules(modules);
+          }}
         />
       ))}
       <AddModule
         addModule={() => {
-          setModules([...modules, { moduleStatus: "placeholderModule" }]);
+          setModules([
+            ...modules,
+            { moduleStatus: "placeholderModule", tempStatus: null },
+          ]);
         }}
       />
       <Footer />

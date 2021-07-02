@@ -18,6 +18,9 @@ export default function Search(props) {
         autoComplete="off"
         onSubmit={(event) => {
           event.preventDefault();
+          if (props.moduleStatus === "placeholderModule") {
+            props.embedContent();
+          }
           props.searchTrigger(searchValue, isToggledValue);
         }}
       >
@@ -36,7 +39,11 @@ export default function Search(props) {
           className="location-button"
           onClick={(event) => {
             event.preventDefault();
-            props.currentLocationButton(isToggledValue)}}
+            if (props.moduleStatus === "placeholderModule") {
+              props.embedContent();
+            }
+            props.currentLocationButton(isToggledValue);
+          }}
         >
           <FontAwesomeIcon icon={Icons.faLocationArrow} />
         </button>
