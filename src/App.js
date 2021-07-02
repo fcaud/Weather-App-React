@@ -9,8 +9,6 @@ import HeaderSpacing from "./HeaderSpacing";
 export default function App() {
   const [date, setDate] = useState(null);
   const [modules, setModules] = useState([
-    { moduleStatus: "liveModule", city: "London", tempStatus: "weather-cold" },
-    { moduleStatus: "liveModule", city: "Madrid", tempStatus: "weather-hot" },
     { moduleStatus: "placeholderModule", tempStatus: null },
   ]);
   return (
@@ -28,6 +26,17 @@ export default function App() {
           }}
           embedContent={() => {
             module.moduleStatus = "liveModule";
+            setModules(modules);
+          }}
+          formatTemp={(temp, unit) => {
+            if (
+              (temp >= 15 && unit === "metric") ||
+              (temp >= 60 && unit === "imperial")
+            ) {
+              module.tempStatus = "weather-hot";
+            } else {
+              module.tempStatus = "weather-cold";
+            }
             setModules(modules);
           }}
         />

@@ -59,6 +59,8 @@ export default function Module(props) {
 
     callForecastAPI(data.coord, unit);
 
+    props.formatTemp(data.main.temp, unit);
+
     setReady(true);
     setCity(data.name);
   }
