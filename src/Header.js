@@ -36,7 +36,7 @@ export default function Header(props) {
   }
 
   if (!props.date) {
-    return <div> loading...</div>;
+    return null;
   } else if (!dateStamp) {
     formatDate(props.date);
   }

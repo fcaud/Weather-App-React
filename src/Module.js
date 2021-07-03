@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Module.css";
 import Forecast from "./Forecast";
 import HeadlineStats from "./HeadlineStats";
@@ -14,6 +14,7 @@ export default function Module(props) {
   const [tempUnit, setTempUnit] = useState("°C");
   const [windUnit, setWindUnit] = useState("kmh");
   const [unit, setUnit] = useState("metric");
+  const [tempStatus, setTempStatus] = useState(props.tempStatus);
 
   function runAPI(city, unit) {
     if (city) {
@@ -36,11 +37,6 @@ export default function Module(props) {
     }
   }
 
-  useEffect(() => {
-    runAPI(props.city, "metric");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   function getWeather(response, unit) {
     const data = response.data;
     const timestamp = new Date(data.dt * 1000);
@@ -59,10 +55,21 @@ export default function Module(props) {
 
     callForecastAPI(data.coord, unit);
 
-    props.formatTemp(data.main.temp, unit);
+    formatTemp(data.main.temp, unit);
 
     setReady(true);
     setCity(data.name);
+  }
+
+  function formatTemp(temp, unit) {
+    if (
+      (temp >= 15 && unit === "metric") ||
+      (temp >= 60 && unit === "imperial")
+    ) {
+      setTempStatus("weather-hot");
+    } else {
+      setTempStatus("weather-cold");
+    }
   }
 
   function callForecastAPI(coordinates, unit) {
@@ -98,7 +105,6 @@ export default function Module(props) {
     });
   }
 
-  let tempStatus = props.tempStatus;
   if (props.moduleStatus === "liveModule") {
     return (
       <section className={`Module ${tempStatus}`}>
