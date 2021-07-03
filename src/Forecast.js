@@ -8,7 +8,7 @@ export default function Forecast(props) {
   if (forecastData) {
     return (
       <div className="row Forecast">
-        {forecastData.slice(0, 4).map((data, index) => {
+        {forecastData.slice(0, 5).map((data, index) => {
           return <ForecastDay data={data} unit={props.unit} key={index} />;
         })}
       </div>
